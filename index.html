@@ -285,18 +285,16 @@
 
   /* 方向ボタン（キャンディ風）。叩く位置と同じ十字の並び：
    *   [◀][▲][▶]
-   *   [◀][▼][▶]   左右はサビまで幅0で隠し、解禁でせり出す */
+   *   [◀][▼][▶]   左右の場所は最初から空けておき（▲▼の大きさは変わらない）、ボタンはサビで現れる */
   #pad {
     position: relative; flex: none;
     display: grid;
-    grid-template-columns: 0fr 1fr 0fr;
+    grid-template-columns: 1fr 1.3fr 1fr;
     grid-template-rows: 62px 62px;
     grid-template-areas: "left up right" "left down right";
-    gap: 8px 0;
+    gap: 8px;
     padding: 10px 14px 14px;
-    transition: grid-template-columns .55s var(--ease-out), column-gap .55s var(--ease-out);
   }
-  #pad.side-on { grid-template-columns: 1fr 1.3fr 1fr; column-gap: 8px; }
   .pad-btn[data-dir="up"] { grid-area: up; }
   .pad-btn[data-dir="down"] { grid-area: down; }
   .pad-btn[data-dir="left"] { grid-area: left; }
@@ -327,11 +325,10 @@
   }
   .pad-btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
   .pad-btn.side {
-    border-width: 0; opacity: 0; transform: scale(.4);
-    transition: opacity .3s ease-out, transform .55s var(--ease-out), border-width .2s;
-    overflow: hidden;
+    opacity: 0; transform: scale(.4); pointer-events: none;
+    transition: opacity .3s ease-out, transform .55s var(--ease-out);
   }
-  #pad.side-on .pad-btn.side { border-width: 3px; opacity: 1; transform: none; }
+  #pad.side-on .pad-btn.side { opacity: 1; transform: none; pointer-events: auto; }
   #pad.side-on .pad-btn.side.pressed { transform: translateY(4px) scale(.97); }
 
   /* リザルト */
